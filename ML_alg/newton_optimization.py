@@ -45,7 +45,6 @@ def newton_optimization(init_pair, max_iter = 1000, tol = 1e-5, verbose=True):
             break
     return opt_val, min_mse
 
-
 if __name__ == '__main__':
     x = np.random.randn(1000, 1)
     # make 2 features: x^2 and x
