@@ -36,8 +36,8 @@ def newton_optimization(init_pair, max_iter = 1000, tol = 1e-5, verbose=True):
         hessian = compute_hessian(points_pair_arr[i])
         points_pair_arr[i + 1] = points_pair_arr[i] - np.dot(np.linalg.pinv(hessian), jacob)
         if verbose:
-            print('On %d iteration m_hats are %.2f and b_hat is %.2f' % (
-            i, points_pair_arr[i, 0], points_pair_arr[i, 1]))
+            print('On %d iteration m_hats are %s and b_hat is %.2f' % (
+            i, tuple(np.round(points_pair_arr[i, :-1], 2)), points_pair_arr[i, -1]))
         opt_val = points_pair_arr[i+1]
         min_mse = min(total_error(points_pair_arr[j]) for j in range(i + 1))
 
