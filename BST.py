@@ -72,6 +72,13 @@ class BST:
                 current_node = current_node.right
         return contains
 
+    def validate_bst(self):
+        current_node = self
+        miv_val, max_val = float('-inf'), float('+inf')
+        if not current_node.left and not current_node.right:
+            return True
+
+
 if __name__ == '__main__':
     tree = BST(5)
     tree.insert(10)
