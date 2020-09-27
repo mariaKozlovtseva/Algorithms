@@ -20,5 +20,5 @@ def monotonic(arr, if_true_false=False):
 
 
 if __name__ == '__main__':
-    print(monotonic([-2,-4,-10,-100]))
+    print(monotonic([1,-2,-4,-10,-100]))
     print(monotonic([0,-1,-2,1,4], if_true_false=True))
