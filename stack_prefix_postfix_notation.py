@@ -40,6 +40,28 @@ def postfix_string(s):
         result.append(stack.pop())
     return ' '.join(result)
 
+def eval_postfix(postfix_s):
+    postfix_s = postfix_s.split()
+    stack = Stack()
+    for elem in postfix_s:
+        if elem in "0123456789":
+            stack.push(int(elem))
+        else:
+            oper2 = stack.pop()
+            oper1 = stack.pop()
+            result = calculate(elem, oper1, oper2)
+            stack.push(result)
+    return stack.pop()
+
+def calculate(op, op1, op2):
+    if op == "*":
+        return op1 * op2
+    elif op == "/":
+        return op1 / op2
+    elif op == "+":
+        return op1 + op2
+    else:
+        return op1 - op2
 
 def prefix_string(s):
     s = s.split()
@@ -64,9 +86,24 @@ def prefix_string(s):
         result.insert(0,stack.pop())
     return ' '.join(result)
 
+def eval_prefix(prefix_s):
+    prefix_s = prefix_s.split()
+    stack = Stack()
+    for elem in prefix_s[::-1]:
+        if elem in "0123456789":
+            stack.push(int(elem))
+        else:
+            oper2 = stack.pop()
+            oper1 = stack.pop()
+            result = calculate(elem, oper1, oper2)
+            stack.push(result)
+    return stack.pop()
+
 if __name__ == '__main__':
     print(postfix_string("( A + B ) * C - ( D - E ) * ( F + G )"))
     print(prefix_string("( A + B ) * C - ( D - E ) * ( F + G )"))
+    print(eval_postfix('7 8 + 3 2 + /'))
+    print(eval_prefix('+ 5 * 4 3'))
 
 
 
