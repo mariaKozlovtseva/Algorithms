@@ -93,8 +93,8 @@ def eval_prefix(prefix_s):
         if elem in "0123456789":
             stack.push(int(elem))
         else:
-            oper2 = stack.pop()
             oper1 = stack.pop()
+            oper2 = stack.pop()
             result = calculate(elem, oper1, oper2)
             stack.push(result)
     return stack.pop()
