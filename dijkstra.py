@@ -1,22 +1,3 @@
-costs = {'record':5,
-         'poster': 0,
-         'guitar': float("inf"),
-         'drums': float("inf"),
-         'piano': float("inf")}
-
-parents = {'record':'book',
-         'poster': 'book',
-         'guitar': None,
-         'drums': None,
-         'piano': None}
-
-graph = {'book': {'record':5, 'poster':0},
-         'poster': {'guitar':30, 'drums':35},
-         'record': {'guitar':15, 'drums':20},
-         'guitar': {'piano':20},
-         'drums': {'piano':10},
-         'piano': {}}
-
 def algo_dijkstra(graph, parents, costs):
     """
     Find the smallest path from book to piano
@@ -56,5 +37,24 @@ def find_lowest_node(costs):
     return lowest_node
 
 if __name__ == '__main__':
+    costs = {'record': 5,
+             'poster': 0,
+             'guitar': float("inf"),
+             'drums': float("inf"),
+             'piano': float("inf")}
+
+    parents = {'record': 'book',
+               'poster': 'book',
+               'guitar': None,
+               'drums': None,
+               'piano': None}
+
+    graph = {'book': {'record': 5, 'poster': 0},
+             'poster': {'guitar': 30, 'drums': 35},
+             'record': {'guitar': 15, 'drums': 20},
+             'guitar': {'piano': 20},
+             'drums': {'piano': 10},
+             'piano': {}}
+
     print(algo_dijkstra(graph, parents, costs))
 
