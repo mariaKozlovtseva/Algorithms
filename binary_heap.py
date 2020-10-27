@@ -12,8 +12,8 @@ class BinaryHeap:
         self.heaplist[i], self.heaplist[j] = self.heaplist[j], self.heaplist[i]
         return self
 
-    def checkPriorityUp(self):
-        i = self.size
+    def checkPriorityUp(self, i=0):
+        if not i: i = self.size
         while i//2:
             if self.heaplist[i] < self.heaplist[i//2]:
                 self.swap(i, i//2)
@@ -49,6 +49,14 @@ class BinaryHeap:
     def isEmpty(self):
         return True if not self.size else False
 
+    def decrease_key(self, i, new_val):
+        self.heaplist[i] = new_val
+        self.checkPriorityUp(i)
+
+    def __delitem__(self, i):
+        self.decrease_key(i, float('-inf'))
+        self.delMin()
+
     def buildHeap(self, lst):
         self.size = len(lst)
         self.heaplist = [0] + lst[:]
@@ -80,7 +88,10 @@ if __name__ == '__main__':
     print(len(bh))
     bh.insert(-5)
     bh.insert(10)
-    print(len(bh))
+    bh.decrease_key(3, -7)
     print(bh)
+    del bh[2]
+    print(bh)
+    print(len(bh))
     print(bh.heapSort([9,6,5,2,3]))
 
