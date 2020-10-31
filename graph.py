@@ -67,6 +67,11 @@ class Graph:
 
     def getVertices(self): return self.vertices.keys()
 
+    def build_graph(self, dictionary):
+        for k, v in dictionary.items():
+            for k2, v2 in v.items():
+                self.addEdge(k, k2, v2)
+
 from collections import deque
 def bfs(g, start):
     start = g.getVertex(start)
@@ -143,3 +148,13 @@ if __name__ == '__main__':
     dfs.addEdge(5, 7)
     dfs.addEdge(7, 8)
     dfs.dfs()
+
+    d = {'A': {'B': 2, 'C': 1},
+         'B': {'A': 2, 'C': 3},
+         'C': {'A': 1, 'B': 3}}
+    g = Graph()
+    g.build_graph(d)
+    neighbours = g.getVertex('A').getConnections()
+    for n in neighbours:
+        print('A has neighbour ' + str(n.getId()) + ' with weight: '
+              + str(g.getVertex('A').getWeight(n)))
