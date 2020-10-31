@@ -26,11 +26,11 @@ class BinaryHeap:
         self.swap(1, -1)
         result = self.heaplist.pop()
         self.size -= 1
-        self.checkPriorityDown(1)
+        self.checkPriorityDown()
         if return_min:
             return result
 
-    def checkPriorityDown(self, i):
+    def checkPriorityDown(self, i=1):
         while i*2 <= self.size:
             min_child = self.minChild(i)
             if self.heaplist[i] > self.heaplist[min_child]:
