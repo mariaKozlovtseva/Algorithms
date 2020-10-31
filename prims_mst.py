@@ -8,16 +8,18 @@ def prims_algo(g, start, inv_ids, ids):
         vertex.setPred(None)
     start.setDist(0)
     ipq.build_heap(dict([(ids[vertex.getId()], vertex.getDist()) for vertex in g]))
-
+    visited = []
     while ipq.size:
         key, val = ipq.extract_min()
         node = g.getVertex(inv_ids[key])
         for neighbour in node.getConnections():
+            if neighbour in visited: continue
             new_val = val + node.getWeight(neighbour)
             if ids[neighbour.getId()] in ipq and new_val < neighbour.getDist():
                 neighbour.setPred(node)
                 neighbour.setDist(new_val)
                 ipq.decrease_key(ids[neighbour.getId()], new_val)
+        visited.append(node)
 
     res = []
     for vertex in g.getVertices():
