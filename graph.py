@@ -34,6 +34,9 @@ class Vertex:
 
     def setColor(self, color): self.color = color
 
+    def __str__(self):
+        return str(self.getId())
+
 
 class Graph:
     def __init__(self):
