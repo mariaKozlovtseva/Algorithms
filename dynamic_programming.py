@@ -26,27 +26,32 @@ def maxSubArray(nums: list) -> int:
         res_arr[i] = max(nums[i], nums[i] + res_arr[i-1])
     return max(res_arr)
 
-def backpack(max_weight, items, weights, prices):
-    arr = [[0 for j in range(max_weight)] for i in range(items)]
-    for i in range(items):
-        for j in range(max_weight):
-            if i==0 and j+1 < weights[i]:
-                arr[i][j] = 0
-            elif j+1 == weights[i]:
-                arr[i][j] = max(arr[i - 1][j], prices[i])
-            elif j+1 > weights[i]:
-                arr[i][j] = max(arr[i-1][j],
-                                arr[i-1][j-weights[i]] + prices[i])
-            else:
-                arr[i][j] = arr[i - 1][j]
+def backpack(max_weight, n_items, weights, prices):
+    arr = [[0 for j in range(max_weight + 1)] for i in range(n_items + 1)]
+    for i in range(1, n_items + 1):
+        for j in range(1, max_weight + 1):
+            arr[i][j] = arr[i - 1][j]
+            if weights[i - 1] <= j:
+                v = arr[i - 1][j - weights[i - 1]] + prices[i - 1]
+                arr[i][j] = max(arr[i][j], v)
     return arr[-1][-1]
 
+def min_coin_change(change, coins):
+    d = [float('inf')]*(change+1)
+    d[0] = 0
+    for i in range(change+1):
+        for c in coins:
+            if i >= c:
+                d[i] = min(d[i], 1 + d[i-c])
+        # print(d)
+    print(d[change])
 
 if __name__ == '__main__':
     print(fib(10))
     print(levenstein_dist('me', 'mike'))
     print(maxSubArray([-2,1,-3,4,-1,2,-5,6]))
     items = 4
-    weights = [2, 3, 4, 6]
+    weights = [0, 1, 4, 5]
     prices = [15, 20, 30, 35]
-    print(backpack(9, items, weights, prices))
+    print(backpack(6, items, weights, prices))
+    min_coin_change(15, [1, 2, 5, 10])
