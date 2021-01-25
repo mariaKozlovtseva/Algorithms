@@ -46,6 +46,22 @@ def min_coin_change(change, coins):
         # print(d)
     print(d[change])
 
+def ladder(n: 'length of array', arr):
+    """
+    Given number 1<= n <=10^2 stairs of ladder and array of integers that mark the steps.
+    Find the maximum amount you can get by going up the stairs
+    (from the zero to the n-th rung), going up one or two rungs each time.
+
+    """
+    if n < 2:
+        print(arr[0])
+        return
+    prev, next = 0, arr[0]
+    for i in range(1, n):
+        prev, next = next, max(prev, next) + arr[i]
+    print(next)
+
+
 if __name__ == '__main__':
     print(fib(10))
     print(levenstein_dist('me', 'mike'))
